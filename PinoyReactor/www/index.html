@@ -42,9 +42,9 @@
       <p id="game-text"> 
          
       </p>
- 
+   <a onclick="reset()">Reset</a>
     </div>
-
+  
 
   </div>
 
@@ -57,17 +57,7 @@
     </button>
   </div>
 
-
-  <!--
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
--->
-  
+ 
 <!-- Modal -->
 <div id="startMenu" class="clearfix modal fade" role="dialog" style="text-align:center;">
   <div class="modal-dialog">
@@ -76,7 +66,7 @@
     <div class="modal-content">
       <div class="modal-header">
 <!--        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-        <h4 class="modal-title">Pinoy Reactor</h4>
+        <h4 class="modal-title"><b>Pinoy Reactor</b></h4>
       </div>
       <div class="modal-body">
         <button id="menuStartBtn" type="button" class="btn btn-success btn-lg" data-dismiss="modal" onclick="start()">START GAME</button>
@@ -94,87 +84,43 @@
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/game/questions.js"></script>
   <script type="text/javascript">
     app.initialize();
   </script>
+  
   <script type="text/javascript">
     
-    
-    var mathProblems = {
-      "2 + 2 = 4":true,
-      "2 + 5 = 1":false,
-      "2 + 1 = 7":false,
-      "2 - 1 = 1":true,
-      "5 / 1 = 3":false,
-      "15 / 20 = 13":false,
-      "15 - 20 = -5":true,
-      "15 + 20 = 35":true,
-      "6 + 20 = 26":true,
-      "6 + 20 = 22":false,
-      "8 + 21 = 22":false,
-      "1 + 10 = 13":false,
-      "100 + 20 = 120":true
+    var questionSets = {
+      "Math Problems":mathProblems,
+      "Pinoy Trivia":pinoyTrivia
     }
-    
-    var pinoyTrivia = {
-      "Si <i>Jose Rizal</i> ang pambansang bayani":true,
-      "Si <i>Jose Rizal</i> ang bumuo ng KKK":false,
-      "Si <i>Apolinario Mabini</i> ang pambansang bayani":false,
-      "Si <i>Apolinario Mabini</i> ang dakilang lumpo":true,
-      "Si <i>Andres Bonifacio</i> ang pambansang bayani":false,
-      "Si <i>Andres Bonifacio</i> ang unang presidente":false,
-      "Si <i>Andres Bonifacio</i> ang bumuo ng KKK":true,
-      "Si <i>Ninoy Aquino</i> ang naging presidente ng Pilipinas noong 2010-2016":false,
-      "Si <i>Ninoy Aquino</i> ang kapatid ni Jose Rizal":false,
-      "Si <i>Noynoy Aquino</i> ang naging presidente ng Pilipinas noong 2010-2016":true
-    }
-    
-    
-    var questionSets = {"Math Problems":mathProblems,"Pinoy Trivia":pinoyTrivia}
     
     var player1Score = 0;
     var player2Score = 0;
     var countdown = 5000;
     
     var questionsTotal = 10;
-    var perSet = questionsTotal/questionSets.length;
-
-
-    $("#button-1").on("tap", function () {
-      player1Score++;
-      $(this).css("background-color", "lime");
-      $(this).css("color", "#000");
-      $(this).html("CORRECT!");
-      $("#button-2").html("Better luck next time!");
-      $("#player-1-score").html(player1Score);
-      $(".game-buttons").attr("disabled", true);
-    })
-
-    $("#button-2").on("tap", function () {
-      player2Score++;
-      $(this).css("background-color", "lime");
-      $(this).css("color", "#000");
-      $(this).html("CORRECT!");
-      $("#button-1").html("Better luck next time!");
-      $("#player-2-score").html(player2Score);
-      $(".game-buttons").attr("disabled", true);
-    })
+    var perSet = 5;
 
     function start() {
+      
+      questionsTotal = 10;
+      perSet = 5;
       
       var keys = Object.keys(questionSets),
           length = keys.length;
       
       var setName = keys[Math.floor(Math.random() * length)];
-      
       var playSet = questionSets[setName];
-      var playSetLength = Object.keys(playSet).length;
+      var questionKey = null;
+      var answer = null
+
+
       
       console.log(setName);
       console.log(playSet);
-      console.log(playSetLength);
-      
-      
+            
       next(setName, playSet);
 
     }
@@ -182,7 +128,11 @@
     function next(setName, playSet) {
       console.log("next");
       
-      $("p[id=game-text]").html("<b style='color:#FFF;'>"+setName +"</b><br>"+Object.keys(playSet)[Math.floor(Math.random() * Object.keys(playSet).length)]);
+      questionKey = Object.keys(playSet)[Math.floor(Math.random() * Object.keys(playSet).length)];
+      
+      answer = playSet[questionKey];
+      
+      $("p[id=game-text]").html("<b style='color:#FFF;'>"+ setName +"</b><br>"+questionKey);
 
       $(".countdown-element").css("height", "100%");
       $(".game-buttons").css("background-color", "#333");
@@ -193,20 +143,61 @@
     }
 
     function count(setName, playSet) {
-//      if (questionsTotal < perSet) {
-//        $(".countdown-element").stop();
-//        
-//      }
-//      else {
+      if (questionsTotal <= perSet) {
+        $(".countdown-element").stop();
+        $(".game-center").hide();
+      }
+      else {
         $(".countdown-element").animate({
           height: "0px"
         }, 5000, function () {
           //Animation complete
           next(setName, playSet);
+          questionsTotal--;
+          console.log(questionsTotal + " " + perSet);
         });
-        questionsTotal--;
-//      }
+      }
     }
+    
+    $("#button-1").on("tap", function () {
+      if (answer) {
+        player1Score++;
+        $(this).css("background-color", "lime");
+        $(this).css("color", "#000");
+        $(this).html("CORRECT!");
+        $("#button-2").html("Better luck next time!");
+        $("#player-1-score").html(player1Score);
+        $(".game-buttons").attr("disabled", true);
+      } else {
+        player1Score--;
+        $(this).css("background-color", "red");
+        $(this).css("color", "#FFF");
+        $(this).html("WRONG!");
+        $("#player-1-score").html(player1Score);
+        $(this).attr("disabled", true);
+      }
+     
+    })
+
+    $("#button-2").on("tap", function () {
+      if (answer) {
+        player2Score++;
+        $(this).css("background-color", "lime");
+        $(this).css("color", "#000");
+        $(this).html("CORRECT!");
+        $("#button-1").html("Better luck next time!");
+        $("#player-2-score").html(player2Score);
+        $(".game-buttons").attr("disabled", true);
+      } else {
+        player2Score--;
+        $(this).css("background-color", "red");
+        $(this).css("color", "#FFF");
+        $(this).html("WRONG!");
+        $("#player-2-score").html(player2Score);
+        $(this).attr("disabled", true);
+      }
+    })
+
 
     function reset() {
       $(".game-buttons").css("background-color", "#333");
@@ -214,9 +205,19 @@
       $(".game-buttons").html("Tap if correct");
       $("#player-1-score").html(0);
       $("#player-2-score").html(0);
+      $(".game-buttons").removeAttr("disabled");
+      $(".countdown-element").stop();
+      $(".countdown-element").css("height", "100%");
+      
       player1Score = 0;
       player2Score = 0;
-      $(".game-buttons").removeAttr("disabled");
+      countdown = 5000;
+     
+      questionsTotal = 10;
+      perSet = questionsTotal/questionSets.length;
+     
+      
+      start();
     }
   </script>
 
