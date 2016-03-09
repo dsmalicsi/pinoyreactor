@@ -3,12 +3,15 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
+* {
+  outline: 0 !important;
+}
 html {
   background-color: #000 !important;
   background-size: cover;
   background-repeat: no-repeat;
   color: #DDD !important;
+  outline: 0 !important;
 }
 body {
   height:100vh;
@@ -107,4 +110,13 @@ p {
   padding-left:5vw;
   font-size:5vh;
   color:#DDD;
+}
+
+.countdown-element {
+  height:100%;
+  position:relative;
+  float:right;
+  z-index:100;
+  background-color:#FFF;
+  width:10px;
 }
