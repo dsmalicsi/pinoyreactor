@@ -8,9 +8,53 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+        <title>PinoyReactor</title>
+        <script src="js/jquery-1.12.1.js"></script>
+        <script src="js/jquery.mobile-1.4.5.js"></script>
     </head>
-    <body>
+    <body style="overflow:hidden;">
+      
+      <div class="player-1 col-md-12 reverse">
+        <div class="pull-top-child">
+          <span id="player-1-score" class="score">0</span>
+        </div>
+        <button id="button-1" class="btn btn-lg pull-bottom">
+        Tap if correct
+        </button>
+      </div>
+      
+      <div class="game-center col-md-12">
+        
+        <div class="countdown-element"></div>
+      
+        <div class="player-1-game reverse">
+        
+        <p id="player-1-game-text">Do you sure?<br>PerpetualWave is <3</p>
+        </div> 
+        <div class="player-2-game">
+        <p id="player-2-game-text">Do you sure?<br>PerpetualWave is <3</p>
+        
+          <a onClick="start()">Start</a>
+          <a onClick="reset()">Reset</a>
+        </div> 
+        
+        
+      </div>
+      
+      <div class="player-2 col-md-12">
+        <div class="pull-top-child">
+          <span id="player-2-score" class="score">0</span>
+        </div>
+        <button id="button-2" class="btn btn-lg pull-bottom">
+        Tap if correct
+        </button>
+      </div>
+     
+ 
+<!--
         <div class="app">
             <h1>PhoneGap</h1>
             <div id="deviceready" class="blink">
@@ -18,10 +62,53 @@
                 <p class="event received">Device is Ready</p>
             </div>
         </div>
+-->
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
+        <script type="text/javascript">
+          
+          var player1Score = 0;
+          var player2Score = 0;
+          var countdown = 5000;
+          
+          
+          $("#button-1").click(function(){
+            player1Score--;
+            $(this).css("background-color", "red");
+            $(this).html("WRONG!");
+            $("#player-1-score").html(player1Score);
+          })          
+          
+          $("#button-2").click(function(){
+            player2Score++;
+            $(this).css("background-color", "green");
+            $(this).html("CORRECT!");
+            $("#player-2-score").html(player2Score);
+          })
+          
+          function start(){
+            setInterval(function(){
+              console.log("next");
+            }
+            ,5000)
+          }
+          
+          function reset(){
+            $("#button-1").css("background-color", "#333");
+            $("#button-2").css("background-color", "#333");
+            $("button-1").html("Tap if correct");
+            $("button-2").html("Tap if correct");
+            $("#player-1-score").html(0);
+            $("#player-2-score").html(0);
+            player1Score = 0;
+            player2Score = 0;
+          }
+        </script>
+      
+          
     </body>
 </html>
