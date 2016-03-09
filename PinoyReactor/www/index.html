@@ -34,13 +34,13 @@
 
     <div class="player-1-game reverse">
 
-      <p id="player-1-game-text">Do you sure?
-        <br>2 + 2 = 4
+      <p id="game-text"> 
+       
       </p>
     </div>
     <div class="player-2-game">
-      <p id="player-2-game-text">Math Problem
-        <br>2 + 2 = 4
+      <p id="game-text"> 
+         
       </p>
  
     </div>
@@ -98,9 +98,46 @@
     app.initialize();
   </script>
   <script type="text/javascript">
+    
+    
+    var mathProblems = {
+      "2 + 2 = 4":true,
+      "2 + 5 = 1":false,
+      "2 + 1 = 7":false,
+      "2 - 1 = 1":true,
+      "5 / 1 = 3":false,
+      "15 / 20 = 13":false,
+      "15 - 20 = -5":true,
+      "15 + 20 = 35":true,
+      "6 + 20 = 26":true,
+      "6 + 20 = 22":false,
+      "8 + 21 = 22":false,
+      "1 + 10 = 13":false,
+      "100 + 20 = 120":true
+    }
+    
+    var pinoyTrivia = {
+      "Si <i>Jose Rizal</i> ang pambansang bayani":true,
+      "Si <i>Jose Rizal</i> ang bumuo ng KKK":false,
+      "Si <i>Apolinario Mabini</i> ang pambansang bayani":false,
+      "Si <i>Apolinario Mabini</i> ang dakilang lumpo":true,
+      "Si <i>Andres Bonifacio</i> ang pambansang bayani":false,
+      "Si <i>Andres Bonifacio</i> ang unang presidente":false,
+      "Si <i>Andres Bonifacio</i> ang bumuo ng KKK":true,
+      "Si <i>Ninoy Aquino</i> ang naging presidente ng Pilipinas noong 2010-2016":false,
+      "Si <i>Ninoy Aquino</i> ang kapatid ni Jose Rizal":false,
+      "Si <i>Noynoy Aquino</i> ang naging presidente ng Pilipinas noong 2010-2016":true
+    }
+    
+    
+    var questionSets = {"Math Problems":mathProblems,"Pinoy Trivia":pinoyTrivia}
+    
     var player1Score = 0;
     var player2Score = 0;
     var countdown = 5000;
+    
+    var questionsTotal = 10;
+    var perSet = questionsTotal/questionSets.length;
 
 
     $("#button-1").on("tap", function () {
@@ -124,30 +161,51 @@
     })
 
     function start() {
-
-
-      next();
-
+      
+      var keys = Object.keys(questionSets),
+          length = keys.length;
+      
+      var setName = keys[Math.floor(Math.random() * length)];
+      
+      var playSet = questionSets[setName];
+      var playSetLength = Object.keys(playSet).length;
+      
+      console.log(setName);
+      console.log(playSet);
+      console.log(playSetLength);
+      
+      
+      next(setName, playSet);
 
     }
 
-    function next() {
+    function next(setName, playSet) {
       console.log("next");
+      
+      $("p[id=game-text]").html("<b style='color:#FFF;'>"+setName +"</b><br>"+Object.keys(playSet)[Math.floor(Math.random() * Object.keys(playSet).length)]);
+
       $(".countdown-element").css("height", "100%");
       $(".game-buttons").css("background-color", "#333");
       $(".game-buttons").css("color", "#DDD");
       $(".game-buttons").html("Tap if correct");
       $(".game-buttons").removeAttr("disabled");
-      count();
+      count(setName, playSet);
     }
 
-    function count() {
-      $(".countdown-element").animate({
-        height: "0px"
-      }, 5000, function () {
-        //Animation complete
-        next();
-      });
+    function count(setName, playSet) {
+//      if (questionsTotal < perSet) {
+//        $(".countdown-element").stop();
+//        
+//      }
+//      else {
+        $(".countdown-element").animate({
+          height: "0px"
+        }, 5000, function () {
+          //Animation complete
+          next(setName, playSet);
+        });
+        questionsTotal--;
+//      }
     }
 
     function reset() {
