@@ -35,17 +35,17 @@
 
     <div class="player-1-game reverse">
 
-      <p id="game-text"> 
-       
+      <p id="game-text">
+
       </p>
     </div>
     <div class="player-2-game">
-      <p id="game-text"> 
-         
+      <p id="game-text">
+
       </p>
-   <a onclick="reset()">Reset</a>
+      <a onclick="reset()">Reset</a>
     </div>
-  
+
 
   </div>
 
@@ -58,30 +58,30 @@
     </button>
   </div>
 
- 
-<!-- Modal -->
-<div id="startMenu" class="clearfix modal fade" role="dialog" style="text-align:center;">
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-<!--        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-        <h4 class="modal-title"><b>Pinoy Reactor</b></h4>
+  <!-- Modal -->
+  <div id="startMenu" class="clearfix modal fade" role="dialog" style="text-align:center;">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+          <h4 class="modal-title"><b>Pinoy Reactor</b></h4>
+        </div>
+        <div class="modal-body">
+          <button id="menuStartBtn" type="button" class="btn btn-success btn-lg" data-dismiss="modal" onclick="start()">START GAME</button>
+          <br>
+          <br>
+          <button id="menuResetBtn" type="button" class="btn btn-warning btn-lg" data-dismiss="modal" onclick="reset()">RESET GAME</button>
+        </div>
+        <div class="modal-footer">
+
+        </div>
       </div>
-      <div class="modal-body">
-        <button id="menuStartBtn" type="button" class="btn btn-success btn-lg" data-dismiss="modal" onclick="start()">START GAME</button>
-        <br>
-        <br>
-        <button id="menuResetBtn" type="button" class="btn btn-warning btn-lg" data-dismiss="modal" onclick="reset()">RESET GAME</button>
-      </div>
-      <div class="modal-footer">
-       
-      </div>
+
     </div>
-
   </div>
-</div>
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
@@ -89,78 +89,52 @@
   <script type="text/javascript">
     app.initialize();
   </script>
-  
+
+
   <script type="text/javascript">
-    
     var questionSets = {
-      "Math Problems":mathProblems,
-      "Pinoy Trivia":pinoyTrivia,
-      "Jak En Poy":jakenPoy
+      "Math Problems": mathProblems,
+      "Pinoy Trivia": pinoyTrivia,
+      "Jak En Poy": jakenPoy
     }
-    
+
+    //Initializer
     var player1Score = 0;
     var player2Score = 0;
     var countdown = 5000;
-    
+
     var questionsTotal = 10;
+    var questionsCount = 10;
     var perSet = 5;
 
+    var keys, length, position, newPosition, setName, playSet,
+      questionKey, answer;
+
     function start() {
-      
+
       questionsTotal = 10;
       perSet = 5;
-      
-      var keys = Object.keys(questionSets),
-          length = keys.length;
-      
-      var setName = keys[Math.floor(Math.random() * length)];
-      var playSet = questionSets[setName];
-      var questionKey = null;
-      var answer = null
 
+      keys = Object.keys(questionSets);
+      length = keys.length;
 
-      
+      position = Math.floor(Math.random() * length)
+      newPosition = null;
+      setName = keys[position];
+      playSet = questionSets[setName];
+      questionKey = null;
+      answer = null
+
       console.log(setName);
       console.log(playSet);
-            
+
       next(setName, playSet);
 
     }
 
-    function next(setName, playSet) {
-      console.log("next");
-      
-      questionKey = Object.keys(playSet)[Math.floor(Math.random() * Object.keys(playSet).length)];
-      
-      answer = playSet[questionKey];
-      
-      $("p[id=game-text]").html("<b style='color:#FFF;'>"+ setName +"</b><br>"+questionKey);
 
-      $(".countdown-element").css("height", "100%");
-      $(".game-buttons").css("background-color", "#333");
-      $(".game-buttons").css("color", "#DDD");
-      $(".game-buttons").html("Tap if correct");
-      $(".game-buttons").removeAttr("disabled");
-      count(setName, playSet);
-    }
+    //Events
 
-    function count(setName, playSet) {
-      if (questionsTotal <= perSet) {
-        $(".countdown-element").stop();
-        $(".game-center").hide();
-      }
-      else {
-        $(".countdown-element").animate({
-          height: "0px"
-        }, 5000, function () {
-          //Animation complete
-          next(setName, playSet);
-          questionsTotal--;
-          console.log(questionsTotal + " " + perSet);
-        });
-      }
-    }
-    
     $("#button-1").on("tap", function () {
       if (answer) {
         player1Score++;
@@ -178,7 +152,7 @@
         $("#player-1-score").html(player1Score);
         $(this).attr("disabled", true);
       }
-     
+
     })
 
     $("#button-2").on("tap", function () {
@@ -200,60 +174,117 @@
       }
     })
 
+    //Functions
+    var _0x3e54 = ["\x6E\x65\x78\x74", "\x6C\x6F\x67", "\x72\x61\x6E\x64\x6F\x6D", "\x6C\x65\x6E\x67\x74\x68", "\x6B\x65\x79\x73", "\x66\x6C\x6F\x6F\x72", "\x3C\x62\x20\x73\x74\x79\x6C\x65\x3D\x27\x63\x6F\x6C\x6F\x72\x3A\x23\x46\x46\x46\x3B\x27\x3E", "\x3C\x2F\x62\x3E\x3C\x62\x72\x3E", "\x68\x74\x6D\x6C", "\x70\x5B\x69\x64\x3D\x67\x61\x6D\x65\x2D\x74\x65\x78\x74\x5D", "\x68\x65\x69\x67\x68\x74", "\x31\x30\x30\x25", "\x63\x73\x73", "\x2E\x63\x6F\x75\x6E\x74\x64\x6F\x77\x6E\x2D\x65\x6C\x65\x6D\x65\x6E\x74", "\x62\x61\x63\x6B\x67\x72\x6F\x75\x6E\x64\x2D\x63\x6F\x6C\x6F\x72", "\x23\x33\x33\x33", "\x2E\x67\x61\x6D\x65\x2D\x62\x75\x74\x74\x6F\x6E\x73", "\x63\x6F\x6C\x6F\x72", "\x23\x44\x44\x44", "\x54\x61\x70\x20\x69\x66\x20\x63\x6F\x72\x72\x65\x63\x74", "\x64\x69\x73\x61\x62\x6C\x65\x64", "\x72\x65\x6D\x6F\x76\x65\x41\x74\x74\x72", "\x20", "\x6D\x6F\x64\x75\x6C\x6F\x3A\x20", "\x6D\x6F\x64\x75\x6C\x6F\x20\x69\x73\x20\x30", "\x73\x74\x6F\x70", "\x3C\x68\x32\x3E\x4E\x65\x78\x74\x20\x52\x6F\x75\x6E\x64\x21\x3C\x2F\x68\x32\x3E", "\x30\x70\x78", "\x61\x6E\x69\x6D\x61\x74\x65", "\x73\x6B\x79\x62\x6C\x75\x65", "\x23\x30\x30\x30", "\x44\x52\x41\x57\x21", "\x61\x74\x74\x72", "\x6E\x65\x77\x50\x6F\x73\x3A\x20", "\x20\x3D\x20", "\x20\x3C\x2D\x20\x73\x65\x6C\x65\x63\x74\x20\x6E\x65\x77\x20\x72\x61\x6E\x64\x6F\x6D\x20\x70\x6F\x73\x69\x74\x69\x6F\x6E", "\x23\x70\x6C\x61\x79\x65\x72\x2D\x31\x2D\x73\x63\x6F\x72\x65", "\x23\x70\x6C\x61\x79\x65\x72\x2D\x32\x2D\x73\x63\x6F\x72\x65"];
+
+    function next(_0xe7e0x2, _0xe7e0x3) {
+      console[_0x3e54[1]](_0x3e54[0]);
+      questionKey = Object[_0x3e54[4]](_0xe7e0x3)[Math[_0x3e54[5]](Math[_0x3e54[2]]() * Object[_0x3e54[4]](_0xe7e0x3)[_0x3e54[3]])];
+      answer = _0xe7e0x3[questionKey];
+      $(_0x3e54[9])[_0x3e54[8]](_0x3e54[6] + _0xe7e0x2 + _0x3e54[7] + questionKey);
+      $(_0x3e54[13])[_0x3e54[12]](_0x3e54[10], _0x3e54[11]);
+      $(_0x3e54[16])[_0x3e54[12]](_0x3e54[14], _0x3e54[15]);
+      $(_0x3e54[16])[_0x3e54[12]](_0x3e54[17], _0x3e54[18]);
+      $(_0x3e54[16])[_0x3e54[8]](_0x3e54[19]);
+      $(_0x3e54[16])[_0x3e54[21]](_0x3e54[20]);
+      count(_0xe7e0x2, _0xe7e0x3)
+    }
+
+    function count(_0xe7e0x2, _0xe7e0x3) {
+      console[_0x3e54[1]](questionsCount + _0x3e54[22] + perSet);
+      console[_0x3e54[1]](_0x3e54[23] + questionsCount % perSet);
+      if (questionsCount != 0) {
+        questionsCount--;
+        if ((questionsCount <= questionsTotal) && (questionsCount % perSet) == 0) {
+          console[_0x3e54[1]](_0x3e54[24]);
+          $(_0x3e54[13])[_0x3e54[25]]();
+          $(_0x3e54[9])[_0x3e54[8]](_0x3e54[26], setTimeout(shuffle(), 3000))
+        } else {
+          $(_0x3e54[13])[_0x3e54[28]]({
+            height: _0x3e54[27]
+          }, 1000, function () {
+            next(_0xe7e0x2, _0xe7e0x3)
+          })
+        }
+      } else {
+        $(_0x3e54[13])[_0x3e54[25]]();
+        if (player1Score > player2Score) {} else {
+          if (player2Score > player1Score) {} else {
+            if (player1Score == player1Score) {
+              $(this)[_0x3e54[12]](_0x3e54[14], _0x3e54[29]);
+              $(this)[_0x3e54[12]](_0x3e54[17], _0x3e54[30]);
+              $(_0x3e54[16])[_0x3e54[8]](_0x3e54[31]);
+              $(_0x3e54[16])[_0x3e54[32]](_0x3e54[20], true)
+            }
+          }
+        }
+      }
+    }
+
+    function shuffle() {
+      $(_0x3e54[13])[_0x3e54[25]]();
+      newPosition = Math[_0x3e54[5]](Math[_0x3e54[2]]() * length);
+      console[_0x3e54[1]](_0x3e54[33] + newPosition);
+      if (newPosition == position) {
+        console[_0x3e54[1]](newPosition + _0x3e54[34] + position + _0x3e54[35]);
+        shuffle()
+      } else {
+        setName = keys[newPosition];
+        playSet = questionSets[setName];
+        next(setName, playSet)
+      }
+    }
 
     function reset() {
-      $(".game-buttons").css("background-color", "#333");
-      $(".game-buttons").css("color", "#DDD");
-      $(".game-buttons").html("Tap if correct");
-      $("#player-1-score").html(0);
-      $("#player-2-score").html(0);
-      $(".game-buttons").removeAttr("disabled");
-      $(".countdown-element").stop();
-      $(".countdown-element").css("height", "100%");
-      
+      $(_0x3e54[16])[_0x3e54[12]](_0x3e54[14], _0x3e54[15]);
+      $(_0x3e54[16])[_0x3e54[12]](_0x3e54[17], _0x3e54[18]);
+      $(_0x3e54[16])[_0x3e54[8]](_0x3e54[19]);
+      $(_0x3e54[36])[_0x3e54[8]](0);
+      $(_0x3e54[37])[_0x3e54[8]](0);
+      $(_0x3e54[16])[_0x3e54[21]](_0x3e54[20]);
+      $(_0x3e54[13])[_0x3e54[25]]();
+      $(_0x3e54[13])[_0x3e54[12]](_0x3e54[10], _0x3e54[11]);
       player1Score = 0;
       player2Score = 0;
       countdown = 5000;
-     
       questionsTotal = 10;
-      perSet = questionsTotal/questionSets.length;
-     
-      
-      start();
+      perSet = questionsTotal / questionSets[_0x3e54[3]];
+      start()
     }
   </script>
 
   <script type="text/javascript">
     $(window).load(function () {
       $('#startMenu').modal('show');
-      $("body").css("padding-right","0px");
-      $("#startMenu").css("padding-right","0px");
-      $("#startMenu").css("margin-top","50%");
+      $("body").css("padding-right", "0px");
+      $("#startMenu").css("padding-right", "0px");
+      $("#startMenu").css("margin-top", "50%");
     });
-    
+
     $(window).on("navigate", function (event, data) {
       var direction = data.state.direction;
       if (direction == 'back') {
         alert("back")
-      $("#menuStartBtn").hide();
-      $('#startMenu').modal('show');
-      $("body").css("padding-right","0px");
-      $("#startMenu").css("padding-right","0px");
-      $("#startMenu").css("margin-top","50%");
+        $("#menuStartBtn").hide();
+        $('#startMenu').modal('show');
+        $("body").css("padding-right", "0px");
+        $("#startMenu").css("padding-right", "0px");
+        $("#startMenu").css("margin-top", "50%");
       }
       if (direction == 'forward') {
-      $("#menuStartBtn").hide();
-      $('#startMenu').modal('show');
-      $("body").css("padding-right","0px");
-      $("#startMenu").css("padding-right","0px");
-      $("#startMenu").css("margin-top","50%");
+        $("#menuStartBtn").hide();
+        $('#startMenu').modal('show');
+        $("body").css("padding-right", "0px");
+        $("#startMenu").css("padding-right", "0px");
+        $("#startMenu").css("margin-top", "50%");
       }
     });
-    
-    $(document).ready(function() {
-      document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+
+    $(document).ready(function () {
+      document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+      }, false);
     });
-                      
   </script>
 
 
