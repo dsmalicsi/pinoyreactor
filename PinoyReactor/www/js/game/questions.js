@@ -28,4 +28,14 @@
       "Si <i>Noynoy Aquino</i> ang naging presidente ng Pilipinas noong 2010-2016":true
     }
     
-    
+    var jakenPoy = {
+      "Gunting + Bato":false,
+      "Gunting + Papel":true,
+      "Gunting + Gunting":false,
+      "Bato + Bato":false,
+      "Bato + Gunting":true,
+      "Bato + Papel":false,
+      "Papel + Gunting":false,
+      "Papel + Papel":false,
+      "Papel + Bato":true
+    }

@@ -94,7 +94,8 @@
     
     var questionSets = {
       "Math Problems":mathProblems,
-      "Pinoy Trivia":pinoyTrivia
+      "Pinoy Trivia":pinoyTrivia,
+      "Jak En Poy":jakenPoy
     }
     
     var player1Score = 0;
@@ -248,6 +249,10 @@
       $("#startMenu").css("margin-top","50%");
       }
     });
+    
+    $(document).ready(function() {
+      document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+    }
   </script>
 
 
