@@ -91,7 +91,7 @@ p {
 }
 
 #button-1, #button-2 {
-  background-color: #333;
+  background-color: #212121;
   color:#DDD;
   font-weight: bold;
   margin: 0px !important;
@@ -103,7 +103,7 @@ p {
 
 #button-1:active, #button-2:active {
   background-color: #DDD;
-  color:#333;
+  color:#212121;
 }
 
 .score {
