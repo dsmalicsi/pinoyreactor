@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.llyradapps.pinoyreact" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.llyradapps.pinoyreact" version="1.1.0">
   <name>PinoyReactor</name>
   <description>Pinoy-themed version of 2-Player Reactor</description>
   <author href="http://dsmalicsi.com" email="me@dsmalicsi.com">Llyrad Apps</author>
