@@ -26,7 +26,7 @@ p {
   text-transform:none;
 }
 
-.reverse {
+.up, .reverse {
   transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -o-transform: rotate(180deg);
@@ -120,3 +120,12 @@ p {
   background-color:#FFF;
   width:10px;
 }
+
+img.pares {
+  width: 25vw;
+  max-width: 15vh;
+  max-height: 15vh;
+  height: 25vw;
+  object-fit: cover;
+}
+ 
