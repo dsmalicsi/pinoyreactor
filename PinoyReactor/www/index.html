@@ -114,34 +114,9 @@
   <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
   <script type="text/javascript">
    app.initialize();
-   document.addEventListener("deviceready", onDR, false);
-    
-    function onDR(){
-              console.log(navigator.notification);
-
-        document.addEventListener("backbutton", backKeyDown, true);
-        //boot your app...
-    }
-    
-    function backKeyDown() {
-        // do something here if you wish
-        navigator.notification.confirm(
-           "This is my Alert text!",
-            callBackFunction, // Specify a function to be called 
-            'Alert Title',
-            ["Ok", "Awesome"]
-        );
-
-    }
-    
-    
-    function callBackFunction(b){
-      if(b == 1){
-        console.log("user said ok");
-      }
-      else {
-        console.log("user said Awesome");
-      }
+   document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        alert(navigator.notification);
     }
   </script>
   <script type="text/javascript" src="js/game/questionset.min.js"></script>
