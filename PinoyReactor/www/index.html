@@ -109,15 +109,17 @@
     </div>
   </div>
   
-  <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
   <script type="text/javascript">
    app.initialize();
    document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
-        alert(navigator.notification);
+        console.log(navigator.notification);
+      navigator.notification.alert("Test message", null, "TEST", "OK")
     }
+    
+    
   </script>
   <script type="text/javascript" src="js/game/questionset.min.js"></script>
   <script type="text/javascript" src="js/game/app.min.js"></script>
