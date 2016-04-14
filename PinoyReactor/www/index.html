@@ -65,7 +65,7 @@
     <div class="modal-dialog" style="text-align:center;height:100vh !important;width:100vw; margin:auto auto;">
 
       <div class="modal-content" style="text-align:center;height:100vh !important;width:100%; margin:0px auto;">
-        <div class="modal-header" style="margin-top:30vh;">
+        <div class="modal-header" style="margin-top:25vh;">
           <h4 class="modal-title"><b>Pinoy Reactor</b></h4>
         </div>
         <div class="modal-body">
@@ -73,11 +73,42 @@
           <br>
           <br>
           <button id="menuAboutBtn" type="button" class="btn btn-warning btn-lg" data-dismiss="modal" onclick="openAboutmenu()">ABOUT</button>
+          <button id="menuAboutBtn" type="button" class="btn btn-info btn-lg" data-dismiss="modal" onclick="openHowmenu()">HOW TO</button>
+          <br>
+          <br>
+          <button id="menuAboutBtn" type="button" class="btn btn-danger btn-lg" data-dismiss="modal" onclick="exitGame()">EXIT GAME</button>
         </div>
         
         <div class="modal-footer">
         </div>
-                  <span style="text-align:center; text-transform:none;">v 1.0</span>
+                <span style="text-align:center; text-transform:none;">version 1.5</span>
+
+
+      </div>
+
+    </div>
+  </div>
+  
+  <div id="pauseMenu" class="clearfix modal fade" role="dialog" >
+    <div class="modal-dialog" style="text-align:center;height:25vh !important;width:100vw; margin:auto;">
+
+      <div class="modal-content" style="margin-top:30vh !important;text-align:center;height:40vh !important;width:100%; margin:0px auto;">
+        <div class="modal-header">
+          <h4 class="modal-title"><b>Game Paused</b></h4>
+        </div>
+        <div class="modal-body">
+          <button id="menuStartBtn" type="button" class="btn btn-warning btn-lg" data-dismiss="modal" onclick="resumeGame()">RESUME GAME</button>
+          <br>
+          <br>
+          <button id="menuStartBtn" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick="start()">NEW GAME</button>
+          <button id="menuAboutBtn" type="button" class="btn btn-danger btn-md" data-dismiss="modal" onclick="exitGame()">EXIT</button>
+        </div>
+        
+        <div class="modal-footer">
+
+        </div>
+        <span style="text-align:center; text-transform:none;">Pinoy Reactor version 1.5</span>
+
 
       </div>
 
@@ -88,7 +119,7 @@
     <div class="modal-dialog" style="text-align:center;height:100vh !important;width:100vw; margin:auto auto;">
 
       <div class="modal-content" style="text-align:center;height:100vh !important;width:100%; margin:0px auto;">
-        <div class="modal-header" style="margin-top:20vh;">
+        <div class="modal-header" style="margin-top:15vh;">
           <h4 class="modal-title"><b>About Pinoy Reactor</b></h4>
         </div>
         <div class="modal-body" style="text-transform:none;text-align:left;">
@@ -103,6 +134,7 @@
           <br>
           <button id="menuAboutBtn" type="button" class="btn btn-warning btn-lg" data-dismiss="modal" onclick="openMainmenu()">BACK</button>
         </div>
+        
         <div class="modal-footer">
 
         </div>
@@ -111,8 +143,42 @@
     </div>
   </div>
   
+  <div id="howMenu" class="clearfix modal fade" role="dialog" >
+    <div class="modal-dialog" style="text-align:center;height:100vh !important;width:100vw; margin:auto auto;">
+
+      <div class="modal-content" style="text-align:center;height:100vh !important;width:100%; margin:0px auto;">
+       
+        <div class="modal-header" style="margin-top:15vh;">
+          <h4 class="modal-title"><b>How to PLay</b></h4>
+        </div>
+        <div class="modal-body" style="text-transform:none;text-align:left;">
+          The game is easy to play! 5 random questions will be displayed from a random set. 
+          <br>
+          <br>Each question set has its own instructions.
+          <br>
+          <br>The players must read the instructions and determine whether the value is correct.
+          <br>
+          <br>If the question is correct, TAP the button. If not, do not tap it and wait for the next question.
+          <br>
+          <br>Whoever the first player who has the highest point by the end of the game wins!
+          <br>
+          <br>
+          <button id="menuAboutBtn" type="button" class="btn btn-warning btn-lg" data-dismiss="modal" onclick="openMainmenu()">BACK</button>
+        </div>
+        
+        <div class="modal-footer">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  
+  
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/vendor/pause.js"></script>
   <script type="text/javascript">
     
     app.initialize();
