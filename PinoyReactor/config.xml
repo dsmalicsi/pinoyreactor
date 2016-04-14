@@ -63,6 +63,7 @@
   <gap:splash src="www/res/screen/ios/screen-ipad-landscape.png" gap:platform="ios" width="1024" height="768"/>
   <gap:splash src="www/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
   <access origin="*"/>
+<!--
   <plugin name="cordova-plugin-whitelist" version="1"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
@@ -73,6 +74,7 @@
   <platform name="android">
     <allow-intent href="market:*"/>
   </platform>
+-->
 <!--
   <platform name="ios">
     <allow-intent href="itms:*"/>
